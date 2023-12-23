@@ -1,0 +1,64 @@
+' @startuml GesFarmaWeb
+' class Gesfarma{
+'     #model
+' }
+
+' Tengo mi diagrama uml 
+' Donde tablas o clases maestras son:
+
+' ORDER tiene una relacion de 1 a 1 con Usuario_Autenticado
+' Orden tiene una relacion de muchas a 1 Informe
+' Orden tiene una relación de 1 a muchas PRODUCTOS
+' ORden tiene una relaicón de 1 a muchas con 1 Cliente
+@startuml OrdenesGesfarma
+
+class Order {
+    + orderId: int
+    #producto:Product
+    #user:AuthenticatedUser
+    #cliente:Client
+    + cantidad
+    
+
+}
+
+class AuthenticatedUser {
+    + userAuthenticatedId: int
+    + idUsuario
+    + idAutenticacion
+    
+}
+
+class Report {
+    + reportId: int
+    #order:Order
+    + indicadores
+    + sueldo
+}
+
+class Product {
+    + productId: int
+    + nombre
+    + precio
+    + descuentoId
+    + fechaVencimiento
+    + laboratorio
+    + categoriaId
+   
+}
+
+class Client {
+    + clientId: int
+    #order:Order
+    + ubicacion
+    + responsable
+}
+
+
+Order "1" -- "1" AuthenticatedUser 
+Order "1..*" <-- "1" Report
+Order "1" -- "1..*" Product
+Order "1..*" .. "1" Client 
+Report "1..*" -- AuthenticatedUser
+
+@enduml
