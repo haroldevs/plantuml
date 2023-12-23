@@ -1,0 +1,35 @@
+
+@startuml ProductosGesfarma
+
+class Order {
+    + orderId: int
+    #producto:Product
+    #user:AuthenticatedUser
+    #cliente:Client
+    + cantidad
+}
+
+
+
+class Product {
+    + productId: int
+    + nombre
+    + precio
+    + descuentoId
+    + fechaVencimiento
+    + laboratorio
+    + categoria:Categoria
+   
+}
+
+class Categoria {
+    + categoriaId: int
+    + nombre
+    + presentacion
+}
+
+Order "1" -- "1..*" Product
+
+Product "1" --> "1" Categoria
+
+@enduml
