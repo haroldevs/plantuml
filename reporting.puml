@@ -1,0 +1,34 @@
+
+@startuml OrdenesGesfarma
+
+class Order {
+    + orderId: int
+    #producto:Product
+    #user:AuthenticatedUser
+    #cliente:Client
+    + cantidad
+    
+
+}
+
+class AuthenticatedUser {
+    + userAuthenticatedId: int
+    + idUsuario
+    + idAutenticacion
+    
+}
+
+class Report {
+    + reportId: int
+    #order:Order
+    + indicadores
+    + sueldo
+
+}
+
+
+Order "1..*" <-- "1" Report
+
+Report "1..*" -- AuthenticatedUser
+
+@enduml

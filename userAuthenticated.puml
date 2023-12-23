@@ -1,0 +1,62 @@
+
+@startuml AuthenticatedUserGesfarma
+
+class Order {
+    + orderId: int
+    #producto:Product
+    #user:AuthenticatedUser
+    #cliente:Client
+    + cantidad
+}
+
+class AuthenticatedUser {
+    + userAuthenticatedId: int
+    + authentication: Authentication
+    + idAutenticacion
+    
+}
+
+class Report {
+    + reportId: int
+    #order:Order
+    + indicadores
+    + sueldo
+}
+
+class Authentication{
+    + authId:int
+    + token
+    + tokenExpiration
+    + refreshToken
+    + refreshTokenExpiration
+}
+
+class UsuarioRol{
+    + usuarioRolId:int
+    + rol: Rol
+    + usuario: Usuario
+}
+
+class Usuario{
+    + usuarioId:int
+    + nombre
+    + password
+}
+
+class Rol{
+    + rolId:int
+    + nombre
+}
+
+
+
+
+Order "1" -- "1" AuthenticatedUser 
+Order "1..*" <-- "1" Report
+Report "1..*" -- AuthenticatedUser
+AuthenticatedUser --> Authentication
+AuthenticatedUser --> UsuarioRol
+UsuarioRol --> Usuario
+UsuarioRol --> Rol
+
+@enduml
